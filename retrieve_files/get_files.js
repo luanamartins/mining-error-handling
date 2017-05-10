@@ -13,15 +13,16 @@ function traverseDirectory(dirname, callback){
 		}
 		var listlength = list.length;
 		list.forEach(function(file){
-			file = dirname+'/'+file;
+			file = dirname + '/' + file;
 			fs.stat(file, function(err, stat){
-				if(file.endsWith('.js')){
+				var isDirectory = stat.isDirectory();
+				if(file.endsWith('.js') && !isDirectory){
 					var contents = fs.readFileSync(file, 'utf-8');
-					if(contents.indexOf('Event')){
+					if(contents.indexOf('try')){
 						directory.push(file);
 					}
 				}
-				if(stat && stat.isDirectory()){
+				if(stat && isDirectory && !file.endsWith('node_modules')){
 					traverseDirectory(file, function(err, parsed){
 						directory = directory.concat(parsed);
 						if(!--listlength){
