@@ -1,4 +1,4 @@
-const testFolder = 'C:/Users/Lhwannah/Documents/UFPE/Mestrado/Projetos no Github/bootstrap/js';
+const testFolder = '';
 
 var query = ['VERSION'];
 
